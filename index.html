@@ -29,20 +29,37 @@
             </form> 
             <div class="thumbnails-section">
                 <div class="thumbnails">
-                    <div>Coco</div>
+                    <div class="thumbnail-name">Coco</div>
                     <div><i class="far fa-times-circle"></i></div>
                 </div>
                 
             </div>
             <div class="dropdown-section">
-                <div class="dropdown-bl dropdown-bl-ingredients">
-                    <form action="" class=" dropdown-ingredients">
+                <div class="dropdown-bl">
+                    <form action="" class="dropdown-ingredients" >
                         <input class="input-ingredient" placeholder="Ingredients"></input>
+                        <i class="fas fa-angle-down arrow-ingredients"></i>
                     </form>
-                    <i class="fas fa-angle-down"></i>
+                    <ul class="tags tag-ingredients" ></ul>
                 </div>
                 
-                <div class="dropdown-bl dropdown-bl-appliance">
+                <div class="dropdown-bl">
+                    <form action="" class="dropdown-appliance" >
+                        <input class="input" placeholder="Appareils"></input>
+                        <i class="fas fa-angle-down arrow-appliance"></i>
+                    </form>
+                </div>
+                
+                <div class="dropdown-bl">
+                    <form action="" class="dropdown-ustensils" >
+                        <input class="input" placeholder="Ustensils"></input>
+                        <i class="fas fa-angle-down arrow-ustensils"></i>
+                    </form>
+                </div>
+
+                
+                
+                <!-- <div class="dropdown-bl dropdown-bl-appliance">
                     <form action="" class="dropdown-appliance">
                         <input class="input" placeholder="Appareils"></input>
                         <i class="fas fa-angle-down"></i>
@@ -54,7 +71,7 @@
                         <input class="input" placeholder="Ustensils"></input>
                         <i class="fas fa-angle-down"></i>
                     </form>
-                </div>
+                </div> -->
 
             </div>
             <div class="recipes-section">
@@ -66,6 +83,8 @@
         <script src="/scripts/recipes-card.js"></script>
         <script src="/scripts/searchBar.js"></script>
         <script src="/scripts/dropdown.js"></script>
+        <script src="/scripts/createTag.js"></script>
+
 
     </body>
 </html>

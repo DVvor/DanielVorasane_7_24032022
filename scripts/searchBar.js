@@ -9,7 +9,8 @@ function searchBar (e){
   || recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element))
 // Recherche dans nom , description, ingredient
   )
-  console.log(result)
+  console.log(element, result)
+
   recipesSection.innerHTML = "";
 
   result.forEach(recipe => {
@@ -19,8 +20,6 @@ function searchBar (e){
     recipesSection.appendChild(recipeCard);
 
 })
-  // return (result)
-
 
 }
 

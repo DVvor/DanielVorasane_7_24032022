@@ -103,22 +103,28 @@ body {
 .dropdown-section {
     display: flex;
     gap: 20px;
+    z-index: 1;
+    position: relative;
 }
 
 .dropdown-bl {
-    height: 69px;
     width: 170px;
+    height: 100%;
     left: 0px;
     top: 0px;
     border-radius: 5px;
     color: white;
     font-weight: 700;
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    flex-direction: column;
     padding-right: 20px;
+    position: relative;
+    z-index: 1;
+    box-sizing: content-box;
 
 }
+
+
 .dropdown-bl:nth-child(1) {
     background-color: #3282F7;
 }
@@ -133,6 +139,9 @@ input::placeholder {
     color: white;
     font-weight: 700;
 }
+input:hover::-webkit-input-placeholder {
+    color: #E7E7E7;
+}
 input:focus::-webkit-input-placeholder {
     color: #E7E7E7;
 }
@@ -145,15 +154,28 @@ input {
     font-weight: 700;
     outline: none;
     border: none;
+    cursor: pointer;
 }
 .dropdown-ingredients {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 69px;
+    width: 100%;
 }
 .dropdown-appliance {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 69px;
+
 }
 .dropdown-ustensils {
     display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 69px;
+
 }
 
 @keyframes dropdown {
@@ -168,8 +190,40 @@ input {
 .fas {
     font-weight: 700;
     font-size: 24px;
+    cursor: pointer;
+}
+.tags {
+    display: none;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-row: 10;
+    width: 100%;
+    background-color: #3282F7;
+    list-style: none;
+    padding-left: 20px;
+    position: absolute;
+    top: 69px;
+    box-sizing: border-box;
+    margin-top: 0%;
+    border-radius: 0px 0px 5px 5px;
+    padding-bottom: 20px;
+    gap: 10px;
+    font-family: Lato;
+    font-size: 18px;
+    padding-right: 20px;
+    overflow: scroll;
+    max-height: 640px ;
+
+}
+.tags > li:hover {
+    background-color: rgb(6, 62, 147, 0.3);
+    /* filter: brightness(150%); */
 }
 
+.tags > li {
+    border-radius: 5px;
+    padding: 10px;
+    padding-right: 50px;
+}
 /* recipes section ************************************************************** */
 
 .recipes-section {

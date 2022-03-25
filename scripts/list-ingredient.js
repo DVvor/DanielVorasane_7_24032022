@@ -19,9 +19,6 @@ component.appendChild(qty);
 /******************************** */
 
 
-console.log(recipes.map(recipe => recipe.ingredients.map( Allingredient => Allingredient.ingredient)))
-
-
 // data.map( recipe => {
 //   recipe.ingredients.map( ingredient => {
 //       allIngredients.push(ingredient.ingredient.toLowerCase());
