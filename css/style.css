@@ -68,9 +68,9 @@ body {
 
 /* *********************************************************************** */
 
-/* thumbnails section ************************************************************** */
+/* tag section ************************************************************** */
 
-.thumbnails-section {
+.tag-section {
     margin-top: 20px ;
     margin-bottom: 20px ;
     display: flex;
@@ -78,8 +78,8 @@ body {
     flex-wrap: wrap;
 
 }
-.thumbnails {
-    width: 107px;
+.btn-tag {
+    /* width: 107px; */
     height: 37px;
     border-radius: 5px;
 
@@ -90,8 +90,11 @@ body {
 
     display: flex;
     align-items: center;
-    justify-content: center;
-    gap: 8px;
+    justify-content: space-around;
+    gap: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+
 }
 .fa-times-circle {
     font-size: 18px;
