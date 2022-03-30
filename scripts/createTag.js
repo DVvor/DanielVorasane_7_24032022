@@ -1,6 +1,6 @@
-const tags = document.querySelectorAll('.tag');
+let tags = document.querySelectorAll('.tag');
 const tagSection = document.querySelector('.tag-section');
-const tag = document.querySelector('.tag');
+let tag = document.querySelector('.tag');
 
 function tagSelected(event) {
 
@@ -16,34 +16,37 @@ function tagSelected(event) {
   
     const closeBtnTag = document.createElement('i');
     closeBtnTag.classList = 'far fa-times-circle';
-  
+    closeBtnTag.addEventListener('click', closeTag)
+
     
     tagSection.appendChild(btnTag);
     btnTag.appendChild(tagName);
     btnTag.appendChild(closeBtnTag);
-    console.log(closeBtnTag)
 
-    closeBtnTag.addEventListener('click', closeTag)
+    
+    // recipesSection.innerHTML = "";
 
-  function closeTag() {
+    //Affichage avec filtres sélectionnés
+
+    // const result = recipes.filter((recipe) => recipe.name.toLowerCase().includes(tagName))
+
+    // result.forEach(recipe => {
+    //   const recipeModel = recipeFactory(recipe);
+    //   const recipeCard = recipeModel.card();
+
+    // recipesSection.appendChild(recipeCard);
+    // })
+
+
+    function closeTag() {
     tagSection.removeChild(btnTag);
     event.target.style.backgroundColor = 'transparent';
-
-
-  }
+    }
 
   }
-
-  
-
 
 }
 const createTag = tags.forEach((tag) => tag.addEventListener('click',tagSelected))
 
-// const btnTagClose = document.querySelector('.fa-times-circle ');
 
-
-
-// barre de recherche filtre et propose les ingrédients en fonction de la recherche 
-// affichage des recettes en fonction des tags sélectionnés
-
+inputIngredients.addEventListener('change',tagSelected)
