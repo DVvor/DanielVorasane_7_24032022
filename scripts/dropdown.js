@@ -16,101 +16,64 @@ const TagUstensils = document.querySelector('.tag-ustensils');
 
 const dropdownBL = document.querySelector('.dropdown-bl');
 
+const arrows = document.querySelectorAll('.fas');
+arrows.forEach(arrow => arrow.addEventListener('click', openDropdown))
 
 function openDropdown(event) {
-  let dropdownbl = event.target.parentNode.parentNode;
+  const menuSelected = event.target.parentNode.parentNode;
+  const inputMenuSelected = event.target.parentNode.querySelector('.input-dropdown')
+  const menuTag = event.target.parentNode.parentNode.querySelector('.tags')
+  const menuDropdown = event.target.parentNode.parentNode.querySelector('.dropdown')
+  const arrowFromMenuSelected = event.target.parentNode.parentNode.querySelector('.fas');
 
-  if(event.target === arrowIngredients) {
-    arrowIngredients.classList.replace('fa-angle-down', 'fa-angle-up');
+  arrowIngredients.classList.replace('fa-angle-down', 'fa-angle-up');
 
-    TagIngredients.style.display = 'grid';
-    dropdownbl.setAttribute('disabled','false');
-    inputIngredients.removeAttribute('placeholder');
-    inputIngredients.setAttribute('placeholder', 'Rechercher un ingrédient');
+    menuTag.style.display = 'grid';
 
-    dropdownAppliances.style.width = null;
+    if (inputMenuSelected.className.includes('ingredients')) {
+      inputMenuSelected.setAttribute('placeholder', 'Rechercher un ingrédient');
+    } else if (inputMenuSelected.className.includes('appliances')) {
+      inputMenuSelected.setAttribute('placeholder', 'Rechercher un appareil');
+    } else if (inputMenuSelected.className.includes('ustensils')) {
+      inputMenuSelected.setAttribute('placeholder', 'Rechercher un ustensile');
+    }
 
-    dropdownbl.style.width = '600px';
-    dropdownbl.style.borderRadius = '5px 5px 0px 0px';
-  }
-  if(event.target === arrowAppliances) {
+    menuDropdown.style.width = null;
+    menuSelected.style.width = '600px';
+    menuSelected.style.borderRadius = '5px 5px 0px 0px';
 
-    console.log(event.target)
-    arrowAppliances.classList.replace('fa-angle-down', 'fa-angle-up');
-
-    TagAppliances.style.display = 'grid';
-    inputAppliances.removeAttribute('placeholder');
-    inputAppliances.setAttribute('placeholder', 'Rechercher un appareil');
-
-    dropdownbl.style.width = '600px';
-    dropdownbl.style.borderRadius = '5px 5px 0px 0px';
-  }
-  // if(event.target === arrowUstensils) {
-  //   arrowAppliance.classList.replace('fa-angle-down', 'fa-angle-up');
-
-  //   TagUstensils.style.display = 'grid';
-  //   inputDropdown.removeAttribute('placeholder');
-  //   inputDropdown.setAttribute('placeholder', 'Rechercher un ingrédient');
-
-  //   dropdownParent.style.width = '600px';
-  //   dropdownParent.style.borderRadius = '5px 5px 0px 0px';
-  // }
-
-}
-
-arrowIngredients.addEventListener('click',openDropdown)
-arrowAppliances.addEventListener('click',openDropdown)
-arrowUstensils.addEventListener('click',openDropdown)
-
-
-function closeDropdown(event) {
-  let dropdownParent = event.target.parentNode.parentNode;
-
-  if(event.target === arrowIngredients) {
-    arrowIngredients.classList.replace('fa-angle-down', 'fa-angle-up');
-
-    TagIngredients.style.display = 'none';
-    inputIngredients.removeAttribute('placeholder');
-    inputIngredients.setAttribute('placeholder', 'Ingrédient');
+    arrows.forEach(arrow => arrow.removeEventListener('click', openDropdown))
+    arrowFromMenuSelected.addEventListener('click', closeDropdown)
     
-    arrowIngredients.classList.replace('fa-angle-up', 'fa-angle-down');
-
-    dropdownParent.style.width = null;
-    dropdownParent.style.borderRadius = '5px';
-
-  }
-  if(event.target.classList == 'fas fa-angle-up arrow-appliance') {
-    arrowIngredients.classList.replace('fa-angle-down', 'fa-angle-up');
-
-    TagAppliances.style.display = 'none';
-    inputAppliances.removeAttribute('placeholder');
-    inputIngredients.setAttribute('placeholder', 'Appareil');
-
-    arrowAppliances.classList.replace('fa-angle-up', 'fa-angle-down');
-
-    dropdownParent.style.width = null;
-    dropdownParent.style.borderRadius = '5px';
-
-  }
-
-
-
-}
-
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    closeDropdown()
-  }
+    function closeDropdown(event) {
+      const menuSelected = event.target.parentNode.parentNode;
+    
+      arrowFromMenuSelected.classList.replace('fa-angle-down', 'fa-angle-up');
   
-})
+      menuTag.style.display = 'none';
+  
+      if (inputMenuSelected.className.includes('ingredients')) {
+        inputMenuSelected.setAttribute('placeholder', 'Ingrédients');
+      } else if (inputMenuSelected.className.includes('appliances')) {
+        inputMenuSelected.setAttribute('placeholder', 'Appareils');
+      } else if (inputMenuSelected.className.includes('ustensils')) {
+        inputMenuSelected.setAttribute('placeholder', 'Ustensils');
+      }
+      
+      arrowFromMenuSelected.classList.replace('fa-angle-up', 'fa-angle-down');
+  
+      menuSelected.style.width = '170px';
+      menuSelected.style.borderRadius = '5px';
+      
+      arrows.forEach(arrow => arrow.removeEventListener('click', closeDropdown))
+      arrows.forEach(arrow => arrow.addEventListener('click', openDropdown))
+    }
+}
 
 function searchBarDropdown (e){
 
   const element = e.target.value.toLowerCase()
   const result = recipes.filter((recipe) => recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element)))
-
-  // console.log(element, result)
-
 
   recipesSection.innerHTML = "";
 
@@ -122,7 +85,7 @@ function searchBarDropdown (e){
   })
 
 }
-inputIngredients.addEventListener('keyup',searchBarDropdown)
+inputIngredients.addEventListener('input',searchBarDropdown)
 
 
 // Affichage de la liste des ingrédients dans le dropdown ingrédient
@@ -142,22 +105,83 @@ function addListIgredientDropdown() {
 }
 addListIgredientDropdown()
 
+function addListAppliancesDropdown() {
+  const ListTagsAppliances = recipes.map( recipe => recipe.appliance)
+  const ListTagsAppliancesUniqueArray  = [...new Set(ListTagsAppliances)] 
+  
+  // console.log(ListTagsAppliancessUniqueArray)
+  ListTagsAppliancesUniqueArray.forEach(function(item) {
+    
+    let list = document.createElement("li");
+    list.innerText = item;
+    list.classList = "tag";
+  
+    TagAppliances.appendChild(list);
+      })
+  
+}
+addListAppliancesDropdown()
 
+function addListUstensilsDropdown() {
+  const ListTagsUstensils = recipes.flatMap((recipe) => recipe.ustensils)
+  const ListTagsUstensilsUniqueArray  = [...new Set(ListTagsUstensils)] 
+
+  ListTagsUstensilsUniqueArray.forEach(function(item) {
+    
+    let list = document.createElement("li");
+    list.innerText = item;
+    list.classList = "tag";
+  
+    TagUstensils.appendChild(list);
+      })
+  
+}
+addListUstensilsDropdown()
 
 // List filtrée des ingrédients quand on cherche avec la barre de recherche du dropdown ingrédient
+
 function listFilteredWithSearchbarDropdown (e){
 
   const element = e.target.value.toLowerCase()
-  const result = recipes.filter((recipe) => recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element)))
+  const menuTag = e.target.parentNode.parentNode.querySelector('.tags')
 
-  const listFiltrered = result.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
-  const listFiltreredUnique  = [...new Set(listFiltrered)] 
+  let result = "";
+  let listFiltrered = "";
+  let listFiltreredUnique = "";
+  let listTagfiltered = "";
 
-  const listTagfiltered = listFiltreredUnique.filter( ingredient => ingredient.toLowerCase().includes(element))
 
-  // console.log(element, result, listFiltreredUnique)
+  if(e.target.parentNode.className.includes('dropdown-ingredients')) {
+    result = recipes.filter((recipe) => recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element)))
+    listFiltrered = result.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
+    listFiltreredUnique  = [...new Set(listFiltrered)] 
+    // console.log(listFiltrered, listFiltreredUnique)
 
-  TagIngredients.innerHTML = "";
+    listTagfiltered = listFiltreredUnique.filter( ingredient => ingredient.toLowerCase().includes(element))
+    
+    // console.log(listTagfiltered)
+  }
+  if(e.target.parentNode.className.includes('dropdown-appliances')) {
+    result = recipes.filter(recipe => recipe.appliance.toLowerCase().includes(element))
+
+    listFiltrered = result.flatMap((recipe) => recipe.appliance)
+    listFiltreredUnique  = [...new Set(listFiltrered)] 
+
+    listTagfiltered = listFiltreredUnique.filter( appliance => appliance.toLowerCase().includes(element))
+
+  }
+
+  if(e.target.parentNode.className.includes('dropdown-ustensils')) {
+    result = recipes.filter(recipe => recipe.ustensils)
+
+    listFiltrered = result.flatMap((recipe) => recipe.ustensils)
+    listFiltreredUnique  = [...new Set(listFiltrered)] 
+
+    listTagfiltered = listFiltreredUnique.filter( ustensil => ustensil.toLowerCase().includes(element))
+
+  }
+
+  menuTag.innerHTML = "";
 
   listTagfiltered.forEach(function(item) {
     
@@ -166,10 +190,12 @@ function listFilteredWithSearchbarDropdown (e){
     list.classList = "tag";
     list.addEventListener('click',tagSelected)
 
-    TagIngredients.appendChild(list);
+    menuTag.appendChild(list);
       })
 
-
 }
-inputIngredients.addEventListener('keyup',listFilteredWithSearchbarDropdown)
+inputIngredients.addEventListener('input',listFilteredWithSearchbarDropdown)
+inputAppliances.addEventListener('input',listFilteredWithSearchbarDropdown)
+inputUstensils.addEventListener('input',listFilteredWithSearchbarDropdown)
+
 
