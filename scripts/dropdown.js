@@ -19,6 +19,11 @@ const dropdownBL = document.querySelector('.dropdown-bl');
 const arrows = document.querySelectorAll('.fas');
 arrows.forEach(arrow => arrow.addEventListener('click', openDropdown))
 
+inputIngredients.addEventListener('change', openDropdown)
+inputAppliances.addEventListener('change', openDropdown)
+inputUstensils.addEventListener('change', openDropdown)
+
+
 function openDropdown(event) {
   const menuSelected = event.target.parentNode.parentNode;
   const inputMenuSelected = event.target.parentNode.querySelector('.input-dropdown')
