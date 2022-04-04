@@ -38,7 +38,8 @@ function openDropdown(event) {
       inputMenuSelected.setAttribute('placeholder', 'Rechercher un ustensile');
     }
 
-    menuDropdown.style.width = null;
+    // menuDropdown.style.width = null;
+    menuSelected.style.animation = 'dropdown 0.3s both';
     menuSelected.style.width = '600px';
     menuSelected.style.borderRadius = '5px 5px 0px 0px';
 
@@ -62,7 +63,8 @@ function openDropdown(event) {
       }
       
       arrowFromMenuSelected.classList.replace('fa-angle-up', 'fa-angle-down');
-  
+      
+      menuSelected.style.animation = 'dropdown-reverse 0.3s both';
       menuSelected.style.width = '170px';
       menuSelected.style.borderRadius = '5px';
       
