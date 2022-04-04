@@ -8,7 +8,7 @@ function tagSelected(event) {
     event.target.style.backgroundColor = 'rgb(6, 62, 147, 0.3)';
 
     const btnTag = document.createElement('div');
-    btnTag.classList = 'btn-tag';
+    // btnTag.classList = 'btn-tag';
   
     const tagName = document.createElement('p');
     tagName.classList = 'tag-name';
@@ -23,20 +23,15 @@ function tagSelected(event) {
     btnTag.appendChild(tagName);
     btnTag.appendChild(closeBtnTag);
 
-    
-    // recipesSection.innerHTML = "";
-
-    //Affichage avec filtres sélectionnés
-
-    // const result = recipes.filter((recipe) => recipe.name.toLowerCase().includes(tagName))
-
-    // result.forEach(recipe => {
-    //   const recipeModel = recipeFactory(recipe);
-    //   const recipeCard = recipeModel.card();
-
-    // recipesSection.appendChild(recipeCard);
-    // })
-
+    if(event.target.parentNode.className.includes('menu-blue')) {
+      btnTag.classList = 'btn-tag tag-blue';
+    }
+    if(event.target.parentNode.className.includes('menu-red')) {
+      btnTag.classList = 'btn-tag tag-red';
+    }
+    if(event.target.parentNode.className.includes('menu-green')) {
+      btnTag.classList = 'btn-tag tag-green';
+    }
 
     function closeTag() {
     tagSection.removeChild(btnTag);
@@ -49,4 +44,4 @@ function tagSelected(event) {
 const createTag = tags.forEach((tag) => tag.addEventListener('click',tagSelected))
 
 
-inputIngredients.addEventListener('change',tagSelected)
+// inputIngredients.addEventListener('change',tagSelected)

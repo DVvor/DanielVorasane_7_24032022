@@ -44,7 +44,8 @@ function openDropdown(event) {
 
     arrows.forEach(arrow => arrow.removeEventListener('click', openDropdown))
     arrowFromMenuSelected.addEventListener('click', closeDropdown)
-    
+
+
     function closeDropdown(event) {
       const menuSelected = event.target.parentNode.parentNode;
     
@@ -70,22 +71,25 @@ function openDropdown(event) {
     }
 }
 
-function searchBarDropdown (e){
+// document.addEventListener('click', closeDropdown)
 
-  const element = e.target.value.toLowerCase()
-  const result = recipes.filter((recipe) => recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element)))
 
-  recipesSection.innerHTML = "";
+// function searchBarDropdown (e){
 
-  result.forEach(recipe => {
-    const recipeModel = recipeFactory(recipe);
-    const recipeCard = recipeModel.card();
+//   const element = e.target.value.toLowerCase()
+//   const result = recipes.filter((recipe) => recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element)))
 
-    recipesSection.appendChild(recipeCard);
-  })
+//   recipesSection.innerHTML = "";
 
-}
-inputIngredients.addEventListener('input',searchBarDropdown)
+//   result.forEach(recipe => {
+//     const recipeModel = recipeFactory(recipe);
+//     const recipeCard = recipeModel.card();
+
+//     recipesSection.appendChild(recipeCard);
+//   })
+
+// }
+// inputIngredients.addEventListener('input',searchBarDropdown)
 
 
 // Affichage de la liste des ingrédients dans le dropdown ingrédient
@@ -98,7 +102,7 @@ function addListIgredientDropdown() {
     let list = document.createElement("li");
     list.innerText = item;
     list.classList = "tag";
-  
+
     TagIngredients.appendChild(list);
       })
   
@@ -115,7 +119,7 @@ function addListAppliancesDropdown() {
     let list = document.createElement("li");
     list.innerText = item;
     list.classList = "tag";
-  
+
     TagAppliances.appendChild(list);
       })
   
@@ -131,7 +135,7 @@ function addListUstensilsDropdown() {
     let list = document.createElement("li");
     list.innerText = item;
     list.classList = "tag";
-  
+
     TagUstensils.appendChild(list);
       })
   
