@@ -7,10 +7,12 @@ function searchBar (e){
   const element = e.target.value.toLowerCase()
   
   if(e.target.value.length == 0) {
+    messageError.style.display ='none';
+    messageError.textContent = '';
     displayRecipes()
   }
   
-  if(e.target.value.length < 3) {
+  if(e.target.value.length == 1 && e.target.value.length < 3 ) {
     messageError.style.display ='block';
     messageError.textContent = 'Veuillez saisir au moins 3 caractères';
   }
