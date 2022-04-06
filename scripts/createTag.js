@@ -102,6 +102,7 @@ tags.forEach(tag => tag.addEventListener('click', recipesArrayWithtagSelected))
 
 
 function DisplayRecipesClickBtnCloseTag() {
+  arrayTagSelected = Array.from(document.querySelectorAll('.tag-name'));
 
   if(arrayTagSelected.length == 0){
     recipesUpdated = recipes
@@ -116,20 +117,20 @@ function DisplayRecipesClickBtnCloseTag() {
     })
   }
 
-  console.log(arrayTagSelected)
-  arrayTagSelected.every(element => {
-    if(element.parentNode.className.includes('tag-red')) {
-      recipesUpdated = recipes.filter(recipe => recipe.ustensils.includes(element.textContent))
-    }
-    if(element.parentNode.className.includes('tag-green')) {
-      recipesUpdated = recipes.filter(recipe => recipe.appliance.includes(element.textContent))
-    }
-    if(element.parentNode.className.includes('tag-blue')) {
-      recipesUpdated = recipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.includes(element.textContent)))
-    }
+  // console.log(arrayTagSelected)
+  // arrayTagSelected.every(element => {
+  //   if(element.parentNode.className.includes('tag-red')) {
+  //     recipesUpdated = recipes.filter(recipe => recipe.ustensils.includes(element.textContent))
+  //   }
+  //   if(element.parentNode.className.includes('tag-green')) {
+  //     recipesUpdated = recipes.filter(recipe => recipe.appliance.includes(element.textContent))
+  //   }
+  //   if(element.parentNode.className.includes('tag-blue')) {
+  //     recipesUpdated = recipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.includes(element.textContent)))
+  //   }
   
-    console.log(recipesUpdated)
-  })
+  //   console.log(recipesUpdated)
+  // })
 
 
 }
