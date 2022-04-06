@@ -188,7 +188,7 @@ function listFilteredWithSearchbarDropdown (e){
     listFiltrered = result.flatMap((recipe) => recipe.ustensils)
     listFiltreredUnique  = [...new Set(listFiltrered)] 
 
-    listTagfiltered = listFiltreredUnique.filter( ustensil => ustensil.toLowerCase().includes(element))
+    listTagfiltered = recipes.filter( ustensil => ustensil.toLowerCase().includes(element))
 
   }
 
