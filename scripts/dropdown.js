@@ -104,9 +104,11 @@ function openDropdown(event) {
 
 // Affichage de la liste des ingrédients dans le dropdown ingrédient
 function addListIgredientDropdown() {
-  const ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
+  const ListTagsIngredients = recipes.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
   const ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)] 
   
+  TagIngredients.innerHTML = '';
+
   ListTagsIngredientsUniqueArray.forEach(function(item) {
     
     let list = document.createElement("li");
@@ -123,6 +125,8 @@ function addListAppliancesDropdown() {
   const ListTagsAppliances = recipes.map( recipe => recipe.appliance)
   const ListTagsAppliancesUniqueArray  = [...new Set(ListTagsAppliances)] 
   
+  TagAppliances.innerHTML = '';
+
   // console.log(ListTagsAppliancessUniqueArray)
   ListTagsAppliancesUniqueArray.forEach(function(item) {
     
@@ -139,6 +143,8 @@ addListAppliancesDropdown()
 function addListUstensilsDropdown() {
   const ListTagsUstensils = recipes.flatMap((recipe) => recipe.ustensils)
   const ListTagsUstensilsUniqueArray  = [...new Set(ListTagsUstensils)] 
+
+  TagUstensils.innerHTML = '';
 
   ListTagsUstensilsUniqueArray.forEach(function(item) {
     
