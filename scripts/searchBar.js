@@ -12,7 +12,7 @@ function searchBar (e){
     displayRecipes()
   }
   
-  if(e.target.value.length == 1 && e.target.value.length < 3 ) {
+  if(e.target.value.length == 1 || e.target.value.length == 2 ) {
     messageError.style.display ='block';
     messageError.textContent = 'Veuillez saisir au moins 3 caractères';
   }

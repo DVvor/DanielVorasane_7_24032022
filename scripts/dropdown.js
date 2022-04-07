@@ -19,6 +19,9 @@ const dropdownBL = document.querySelector('.dropdown-bl');
 const arrows = document.querySelectorAll('.fas');
 arrows.forEach(arrow => arrow.addEventListener('click', openDropdown))
 
+let recipesUpdated = recipes;
+
+
 inputIngredients.addEventListener('change', openDropdown)
 inputAppliances.addEventListener('change', openDropdown)
 inputUstensils.addEventListener('change', openDropdown)
@@ -101,7 +104,7 @@ function openDropdown(event) {
 
 // Affichage de la liste des ingrédients dans le dropdown ingrédient
 function addListIgredientDropdown() {
-  const ListTagsIngredients = recipes.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
+  const ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
   const ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)] 
   
   ListTagsIngredientsUniqueArray.forEach(function(item) {
@@ -163,7 +166,7 @@ function listFilteredWithSearchbarDropdown (e){
 
 
   if(e.target.parentNode.className.includes('dropdown-ingredients')) {
-    result = recipes.filter((recipe) => recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element)))
+    result = recipesUpdated.filter((recipe) => recipe.ingredients.some(item => item.ingredient.toLowerCase().includes(element)))
     listFiltrered = result.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
     listFiltreredUnique  = [...new Set(listFiltrered)] 
     // console.log(listFiltrered, listFiltreredUnique)
@@ -173,7 +176,7 @@ function listFilteredWithSearchbarDropdown (e){
     // console.log(listTagfiltered)
   }
   if(e.target.parentNode.className.includes('dropdown-appliances')) {
-    result = recipes.filter(recipe => recipe.appliance.toLowerCase().includes(element))
+    result = recipesUpdated.filter(recipe => recipe.appliance.toLowerCase().includes(element))
 
     listFiltrered = result.flatMap((recipe) => recipe.appliance)
     listFiltreredUnique  = [...new Set(listFiltrered)] 
@@ -183,12 +186,12 @@ function listFilteredWithSearchbarDropdown (e){
   }
 
   if(e.target.parentNode.className.includes('dropdown-ustensils')) {
-    result = recipes.filter(recipe => recipe.ustensils)
+    result = recipesUpdated.filter(recipe => recipe.ustensils)
 
     listFiltrered = result.flatMap((recipe) => recipe.ustensils)
     listFiltreredUnique  = [...new Set(listFiltrered)] 
 
-    listTagfiltered = recipes.filter( ustensil => ustensil.toLowerCase().includes(element))
+    listTagfiltered = listFiltreredUnique.filter( ustensil => ustensil.toLowerCase().includes(element))
 
   }
 

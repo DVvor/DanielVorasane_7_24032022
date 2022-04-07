@@ -2,8 +2,8 @@ let tags = document.querySelectorAll('.tag');
 const tagSection = document.querySelector('.tag-section');
 let tag = document.querySelector('.tag');
 let btnCloseTag = document.querySelectorAll('.far fa-time-circle');
-let recipesUpdated = recipes
 let arrayTagSelected = []
+
 // Creation Tag **************************************************
 function tagSelected(event) {
 
@@ -48,57 +48,55 @@ function tagSelected(event) {
 
   }
 
-}
-const createTag = tags.forEach((tag) => tag.addEventListener('click',tagSelected))
+  // Filtre tableau avec tag sélectionnés **************************************************
 
-
-
-// Filtre tableau avec tag sélectionnés **************************************************
-function recipesArrayWithtagSelected(e) {
-  // Array from permet de transformer l'élément cible en tableau - .map ne fonctionne qu'avec un tableau
-  // let arrayTagSelected = Array.from(document.querySelectorAll('.tag-name')).map(btn => btn.textContent);
-  /* 
-  Avec la méthode .forEach, cela nous aurait pris plus de ligne
+  function recipesArrayWithtagSelected() {
+    // Array from permet de transformer l'élément cible en tableau - .map ne fonctionne qu'avec un tableau
+    // let arrayTagSelected = Array.from(document.querySelectorAll('.tag-name')).map(btn => btn.textContent);
+    /* 
+    Avec la méthode .forEach, cela nous aurait pris plus de ligne
+    
+    let arrayTagSelected = [];
+    allBtnTagsSelected = document.querySelectorAll('.tag-name');
+    allBtnTagsSelected.forEach(btn => arrayTagSelected.push(btn.textContent))
+    
+    */
   
-  let arrayTagSelected = [];
-  allBtnTagsSelected = document.querySelectorAll('.tag-name');
-  allBtnTagsSelected.forEach(btn => arrayTagSelected.push(btn.textContent))
+    const btnselected = event.target.textContent
+
+    if(event.target.parentNode.className.includes('menu-red')) {
+      recipesUpdated = recipesUpdated.filter(recipe => recipe.ustensils.includes(btnselected));
+    }
+
+    if(event.target.parentNode.className.includes('menu-green')) {
+      recipesUpdated = recipesUpdated.filter(recipe => recipe.appliance.includes(btnselected));
+    }
+
+    if(event.target.parentNode.className.includes('menu-blue')) {
+      recipesUpdated = recipesUpdated.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.includes(btnselected)))
+    }
+
+    // Tableau des recettes actualisés avec les tags sélectionnés
+    recipesSection.innerHTML = "";
   
-  */
+    recipesUpdated.forEach(recipe => {
+      const recipeModel = recipeFactory(recipe);
+      const recipeCard = recipeModel.card();
+  
+      recipesSection.appendChild(recipeCard);
+    })
+  
+    console.log(recipesUpdated)
 
-  const btnselected = e.target.textContent
-
-  if(e.target.parentNode.className.includes('menu-red')) {
-    recipesUpdated = recipesUpdated.filter(recipe => recipe.ustensils.includes(btnselected))
+  
   }
-  if(e.target.parentNode.className.includes('menu-green')) {
-    recipesUpdated = recipesUpdated.filter(recipe => recipe.appliance.includes(btnselected))
-  }
-  if(e.target.parentNode.className.includes('menu-blue')) {
-    recipesUpdated = recipesUpdated.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.includes(btnselected)))
-  }
-
-  // Tableau des recettes actualisés avec les tags sélectionnés
-  recipesSection.innerHTML = "";
-
-  recipesUpdated.forEach(recipe => {
-    const recipeModel = recipeFactory(recipe);
-    const recipeCard = recipeModel.card();
-
-    recipesSection.appendChild(recipeCard);
-  })
-
-  console.log(recipesUpdated)
-
+  recipesArrayWithtagSelected()
+  
 
 }
-recipesArrayWithtagSelected
+tags.forEach((tag) => tag.addEventListener('click',tagSelected))
 
-
-tags.forEach(tag => tag.addEventListener('click', recipesArrayWithtagSelected))
-
-
-// tableau actualisé est égale au départ à recettes
+// tags.forEach(tag => tag.addEventListener('click', recipesArrayWithtagSelected))
 
 
 function DisplayRecipesClickBtnCloseTag() {
@@ -140,3 +138,27 @@ function DisplayRecipesClickBtnCloseTag() {
 boucle qui reprend chaque element de l'ensemble et fait actualisé l'affichage des recettes.
 selon le tag de la boucle, si il a pour parent X (rouge vert ou bleu) alors = execution spécifique du code pour filtrer
 */
+
+function listTagUpdated(event) {
+
+
+  if(event.target.parentNode.className.includes('menu-blue')) {
+
+    let ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
+      let ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)] 
+      
+      TagIngredients.innerHTML = "";
+
+      ListTagsIngredientsUniqueArray.forEach(function(item) {
+
+      let list = document.createElement("li");
+      list.innerText = item;
+      list.classList = "tag";
+      list.addEventListener('click',listTagUpdated);
+
+      TagIngredients.appendChild(list);
+      })
+  }
+}
+
+tags.forEach((tag) => tag.addEventListener('click',listTagUpdated))
