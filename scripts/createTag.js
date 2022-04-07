@@ -43,7 +43,7 @@ function tagSelected(event) {
     function closeTag() {
     tagSection.removeChild(btnTag);
     event.target.style.backgroundColor = 'transparent';
-    DisplayRecipesClickBtnCloseTag()
+    recipesArrayWithtagSelected()
     }
 
   }
@@ -51,31 +51,18 @@ function tagSelected(event) {
   // Filtre tableau avec tag sélectionnés **************************************************
 
   function recipesArrayWithtagSelected() {
-    // Array from permet de transformer l'élément cible en tableau - .map ne fonctionne qu'avec un tableau
-    // let arrayTagSelected = Array.from(document.querySelectorAll('.tag-name')).map(btn => btn.textContent);
-    /* 
-    Avec la méthode .forEach, cela nous aurait pris plus de ligne
-    
-    let arrayTagSelected = [];
-    allBtnTagsSelected = document.querySelectorAll('.tag-name');
-    allBtnTagsSelected.forEach(btn => arrayTagSelected.push(btn.textContent))
-    
-    */
+
+    const ingredientsTagsSelected = Array.from(document.querySelectorAll(".tag-blue")).map(tag => tag.textContent);
+    const appliancesTagsSelected = Array.from(document.querySelectorAll(".tag-green")).map(tag => tag.textContent);
+    const ustensilsTagsSelected = Array.from(document.querySelectorAll(".tag-red")).map(tag => tag.textContent);
   
-    const btnselected = event.target.textContent
+    recipesUpdated = recipes.filter(recipe => 
+      appliancesTagsSelected.every(tags => recipe.appliance.includes(tags)) // get recipe including EVERY tags from appliancesTagsSelected array, can't use includes alone because will get only one tag
+      && ustensilsTagsSelected.every(tags => recipe.ustensils.includes(tags))
+      && ingredientsTagsSelected.every(tags => recipe.ingredients.some(ingredientItem => ingredientItem.ingredient.includes(tags)))
+    );
 
-    if(event.target.parentNode.className.includes('menu-red')) {
-      recipesUpdated = recipesUpdated.filter(recipe => recipe.ustensils.includes(btnselected));
-    }
-
-    if(event.target.parentNode.className.includes('menu-green')) {
-      recipesUpdated = recipesUpdated.filter(recipe => recipe.appliance.includes(btnselected));
-    }
-
-    if(event.target.parentNode.className.includes('menu-blue')) {
-      recipesUpdated = recipesUpdated.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.includes(btnselected)))
-    }
-
+    // recipesUpdated = recipesCorrespondingToTags
     // Tableau des recettes actualisés avec les tags sélectionnés
     recipesSection.innerHTML = "";
   
@@ -85,18 +72,13 @@ function tagSelected(event) {
   
       recipesSection.appendChild(recipeCard);
     })
-  
-    console.log(recipesUpdated)
 
-  
   }
   recipesArrayWithtagSelected()
   
 
 }
 tags.forEach((tag) => tag.addEventListener('click',tagSelected))
-
-// tags.forEach(tag => tag.addEventListener('click', recipesArrayWithtagSelected))
 
 
 function DisplayRecipesClickBtnCloseTag() {
@@ -114,22 +96,6 @@ function DisplayRecipesClickBtnCloseTag() {
     recipesSection.appendChild(recipeCard);
     })
   }
-
-  // console.log(arrayTagSelected)
-  // arrayTagSelected.every(element => {
-  //   if(element.parentNode.className.includes('tag-red')) {
-  //     recipesUpdated = recipes.filter(recipe => recipe.ustensils.includes(element.textContent))
-  //   }
-  //   if(element.parentNode.className.includes('tag-green')) {
-  //     recipesUpdated = recipes.filter(recipe => recipe.appliance.includes(element.textContent))
-  //   }
-  //   if(element.parentNode.className.includes('tag-blue')) {
-  //     recipesUpdated = recipes.filter(recipe => recipe.ingredients.some(ingredient => ingredient.ingredient.includes(element.textContent)))
-  //   }
-  
-  //   console.log(recipesUpdated)
-  // })
-
 
 }
 
