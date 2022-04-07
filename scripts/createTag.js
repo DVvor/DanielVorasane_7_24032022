@@ -44,6 +44,7 @@ function tagSelected(event) {
     tagSection.removeChild(btnTag);
     event.target.style.backgroundColor = 'transparent';
     recipesArrayWithtagSelected()
+    listTagUpdated(event)
     }
 
   }
@@ -75,7 +76,29 @@ function tagSelected(event) {
 
   }
   recipesArrayWithtagSelected()
+  listTagUpdated(event)
   
+  function listTagUpdated(event) {
+
+
+    if(event.target.parentNode.className.includes('menu-blue')) {
+  
+      let ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
+        let ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)] 
+        
+        TagIngredients.innerHTML = "";
+  
+        ListTagsIngredientsUniqueArray.forEach(function(item) {
+  
+        let list = document.createElement("li");
+        list.innerText = item;
+        list.classList = "tag";
+        // list.addEventListener('click',listTagUpdated);
+  
+        TagIngredients.appendChild(list);
+        })
+    }
+  }
 
 }
 tags.forEach((tag) => tag.addEventListener('click',tagSelected))
@@ -104,27 +127,3 @@ function DisplayRecipesClickBtnCloseTag() {
 boucle qui reprend chaque element de l'ensemble et fait actualisé l'affichage des recettes.
 selon le tag de la boucle, si il a pour parent X (rouge vert ou bleu) alors = execution spécifique du code pour filtrer
 */
-
-function listTagUpdated(event) {
-
-
-  if(event.target.parentNode.className.includes('menu-blue')) {
-
-    let ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
-      let ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)] 
-      
-      TagIngredients.innerHTML = "";
-
-      ListTagsIngredientsUniqueArray.forEach(function(item) {
-
-      let list = document.createElement("li");
-      list.innerText = item;
-      list.classList = "tag";
-      list.addEventListener('click',listTagUpdated);
-
-      TagIngredients.appendChild(list);
-      })
-  }
-}
-
-tags.forEach((tag) => tag.addEventListener('click',listTagUpdated))
