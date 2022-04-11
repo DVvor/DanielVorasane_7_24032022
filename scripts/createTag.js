@@ -5,23 +5,22 @@ let btnCloseTag = document.querySelectorAll('.far fa-time-circle');
 let arrayTagSelected = []
 
 // Creation Tag **************************************************
-  function tagSelected(event) {
+function tagSelected(event) {
 
     if (!tagSection.textContent.includes(event.target.textContent)) {
       event.target.style.backgroundColor = 'rgb(6, 62, 147, 0.3)';
 
       const btnTag = document.createElement('div');
-      // btnTag.classList = 'btn-tag';
-    
+
       const tagName = document.createElement('p');
       tagName.classList = 'tag-name';
       tagName.textContent = event.target.textContent;
     
       const closeBtnTag = document.createElement('i');
       closeBtnTag.classList = 'far fa-times-circle';
-      closeBtnTag.addEventListener('click', closeTag)
+      closeBtnTag.addEventListener('click', closeTag);
 
-      
+
       tagSection.appendChild(btnTag);
       btnTag.appendChild(tagName);
       btnTag.appendChild(closeBtnTag);
@@ -39,23 +38,10 @@ let arrayTagSelected = []
       function closeTag() {
         tagSection.removeChild(btnTag);
         event.target.style.backgroundColor = 'transparent';
-        recipesArrayWithtagSelected()
-        // listTagUpdated(event)
-        const ingredientsTagsSelected = Array.from(document.querySelectorAll(".tag-blue")).map(tag => tag.textContent);
-        const appliancesTagsSelected = Array.from(document.querySelectorAll(".tag-green")).map(tag => tag.textContent);
-        const ustensilsTagsSelected = Array.from(document.querySelectorAll(".tag-red")).map(tag => tag.textContent);
-
-        if(ingredientsTagsSelected.length === 0) {
-          addListIgredientDropdown()  
-        }
-        if(appliancesTagsSelected.length === 0) {
-          addListAppliancesDropdown()  
-        }
-        if(ustensilsTagsSelected.length === 0) {
-          addListUstensilsDropdown()  
-        }
+        recipesArrayWithtagSelected();
+        listTagUpdated();
+        DisplayRecipesClickBtnCloseTag();
       }
-
     }
 
     // Filtre tableau avec tag sélectionnés **************************************************
@@ -65,7 +51,7 @@ let arrayTagSelected = []
       const ingredientsTagsSelected = Array.from(document.querySelectorAll(".tag-blue")).map(tag => tag.textContent);
       const appliancesTagsSelected = Array.from(document.querySelectorAll(".tag-green")).map(tag => tag.textContent);
       const ustensilsTagsSelected = Array.from(document.querySelectorAll(".tag-red")).map(tag => tag.textContent);
-    
+      
       recipesUpdated = recipes.filter(recipe => 
         appliancesTagsSelected.every(tags => recipe.appliance.includes(tags)) // get recipe qui inclus chaque tag de appliancesTagsSelected array, car on ne peut pas utiliser .includes seul (ne peut inclure qu'un élément)
         && ustensilsTagsSelected.every(tags => recipe.ustensils.includes(tags))
@@ -84,103 +70,95 @@ let arrayTagSelected = []
       })
 
     }
-    
-    recipesArrayWithtagSelected()
-    listTagUpdated(event)
-    
-    function listTagUpdated(event) {
 
-      if(event.target.parentNode.className.includes('menu-blue')) {
-    
-        let ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient))
-          let ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)] 
-          
-          TagIngredients.innerHTML = "";
-    
-          ListTagsIngredientsUniqueArray.forEach(function(item) {
-    
-            let list = document.createElement("li");
-            list.innerText = item;
-            list.classList = "tag";
-            list.addEventListener('click',tagSelected);
+    recipesArrayWithtagSelected();
+    listTagUpdated();
+
+
+    function listTagUpdated() {
+      // ingredients
+      let ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient));
+      let ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)];
       
-            TagIngredients.appendChild(list);
-          })
-      } else if(event.target.parentNode.className.includes('menu-red')) {
-    
-          let ListTagsUstensils = recipesUpdated.flatMap((recipe) => recipe.ustensils)
-          let ListTagsUstensilsUniqueArray  = [...new Set(ListTagsUstensils)] 
-          
-          TagUstensils.innerHTML = "";
-    
-          ListTagsUstensilsUniqueArray.forEach(function(item) {
-    
-            let list = document.createElement("li");
-            list.innerText = item;
-            list.classList = "tag";
-            list.addEventListener('click',tagSelected);
+      TagIngredients.innerHTML = "";
+
+      ListTagsIngredientsUniqueArray.forEach(function(item) {
+        let list = document.createElement("li");
+        list.innerText = item;
+        list.classList = "tag";
+        list.addEventListener('click', tagSelected);
+        
+        if (tagSection.textContent.includes(item)) {
+          list.style.backgroundColor = 'rgb(6, 62, 147, 0.3)';
+        }
+
+        TagIngredients.appendChild(list);
+      })
+
+      // ustensils
+      let ListTagsUstensils = recipesUpdated.flatMap((recipe) => recipe.ustensils);
+      let ListTagsUstensilsUniqueArray  = [...new Set(ListTagsUstensils)];
       
-            TagUstensils.appendChild(list);
-          })
-      } else if(event.target.parentNode.className.includes('menu-green')) {
-    
-          let ListTagsAppliances = recipesUpdated.flatMap((recipe) => recipe.appliance)
-          let ListTagsAppliancesUniqueArray  = [...new Set(ListTagsAppliances)] 
-          
-          TagAppliances.innerHTML = "";
-    
-          ListTagsAppliancesUniqueArray.forEach(function(item) {
-    
-            let list = document.createElement("li");
-            list.innerText = item;
-            list.classList = "tag";
-            list.addEventListener('click',tagSelected);
+      TagUstensils.innerHTML = "";
+
+      ListTagsUstensilsUniqueArray.forEach(function(item) {
+        let list = document.createElement("li");
+        list.innerText = item;
+        list.classList = "tag";
+        list.addEventListener('click', tagSelected);
+        
+        if (tagSection.textContent.includes(item)) {
+          list.style.backgroundColor = 'rgb(6, 62, 147, 0.3)';
+        }
+
+        TagUstensils.appendChild(list);
+      })
+
+      // appliances
+      let ListTagsAppliances = recipesUpdated.flatMap((recipe) => recipe.appliance);
+      let ListTagsAppliancesUniqueArray  = [...new Set(ListTagsAppliances)];
       
-            TagAppliances.appendChild(list);
-          })
-      }
-      if(event.target.className.includes('fa-times-circle')) {
-    
-        let ListTagsAppliances = recipesUpdated.flatMap((recipe) => recipe.ustensils)
-          let ListTagsAppliancesUniqueArray  = [...new Set(ListTagsAppliances)] 
-          
-          TagAppliances.innerHTML = "";
-    
-          ListTagsAppliancesUniqueArray.forEach(function(item) {
-    
-            let list = document.createElement("li");
-            list.innerText = item;
-            list.classList = "tag";
-            list.addEventListener('click',tagSelected);
-      
-            TagAppliances.appendChild(list);
-          })
-      }
+      TagAppliances.innerHTML = "";
 
-    }
+      ListTagsAppliancesUniqueArray.forEach(function(item) {
+        let list = document.createElement("li");
+        list.innerText = item;
+        list.classList = "tag";
+        list.addEventListener('click', tagSelected);
+        
+        if (tagSection.textContent.includes(item)) {
+          list.style.backgroundColor = 'rgb(6, 62, 147, 0.3)';
+        }
 
-  }
-tags.forEach((tag) => tag.addEventListener('click',tagSelected))
-
-
-  function DisplayRecipesClickBtnCloseTag() {
-    arrayTagSelected = Array.from(document.querySelectorAll('.tag-name'));
-
-    if(arrayTagSelected.length == 0){
-      recipesUpdated = recipes
-
-      recipesSection.innerHTML = "";
-
-      recipesUpdated.forEach(recipe => {
-      const recipeModel = recipeFactory(recipe);
-      const recipeCard = recipeModel.card();
-
-      recipesSection.appendChild(recipeCard);
+        TagAppliances.appendChild(list);
       })
     }
 
-  }
+}
 
+tags.forEach((tag) => tag.addEventListener('click',tagSelected));
+
+
+function DisplayRecipesClickBtnCloseTag() {
+  arrayTagSelected = Array.from(document.querySelectorAll('.tag-name'));
+
+  if(arrayTagSelected.length == 0){
+    searchBar();
+
+    recipesSection.innerHTML = "";
+
+    recipesUpdated.forEach(recipe => {
+    const recipeModel = recipeFactory(recipe);
+    const recipeCard = recipeModel.card();
+
+    recipesSection.appendChild(recipeCard);
+    })
+  }
+}
 
   // Manque re actualiser liste tags apres avoir sélectionné un tag
-  // Manque quand aucun tag => liste tag d'origine 
+// keyup barre de re cherche principal 
+
+// temps de latence quand on tape du texte dans 'linput
+
+// event prevent default pour empecher l'input dropdown de fonctionner
