@@ -1,4 +1,4 @@
-// Add list ingredient on each recipes
+// Ajout de la liste des ingrédients sur chaque recette (carte)
 
 const listIngredients = document.createElement("div");
 listIngredients.classList.add("list-ingredients");
@@ -17,10 +17,3 @@ listIngredients.appendChild(component);
 component.appendChild(typeIngredient);
 component.appendChild(qty);
 /******************************** */
-
-
-// data.map( recipe => {
-//   recipe.ingredients.map( ingredient => {
-//       allIngredients.push(ingredient.ingredient.toLowerCase());
-//   })
-// })

@@ -1,7 +1,8 @@
+// DOM Elements
 const recipesSection = document.querySelector(".recipes-section");
 
 
-// create recipes card
+// creation carte recette
 function recipeFactory(recipe) {
 
 const {id, name,servings, ingredients,time,description,appliance,ustensils } = recipe;
@@ -46,8 +47,6 @@ const {id, name,servings, ingredients,time,description,appliance,ustensils } = r
 
             listIngredients.appendChild(ingredientcard);
         });
-        
-        
 
         const dscrptn = document.createElement("div");
         dscrptn.classList.add("description");
@@ -73,9 +72,6 @@ const {id, name,servings, ingredients,time,description,appliance,ustensils } = r
 
         return (recipeCard);
     }
-
-
-
     return {card}
 }
 

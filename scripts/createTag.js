@@ -1,7 +1,10 @@
+
+//DOM
 let tags = document.querySelectorAll('.tag');
 const tagSection = document.querySelector('.tag-section');
 let tag = document.querySelector('.tag');
 let btnCloseTag = document.querySelectorAll('.far fa-time-circle');
+
 let arrayTagSelected = []
 
 // Creation Tag **************************************************
@@ -27,12 +30,18 @@ function tagSelected(event) {
 
       if(event.target.parentNode.className.includes('menu-blue')) {
         btnTag.classList = 'btn-tag tag-blue';
+        inputIngredients.value = "";
+
       }
       if(event.target.parentNode.className.includes('menu-red')) {
         btnTag.classList = 'btn-tag tag-red';
+        inputUstensils.value = "";
+
       }
       if(event.target.parentNode.className.includes('menu-green')) {
         btnTag.classList = 'btn-tag tag-green';
+        inputAppliances.value = "";
+
       }
 
       function closeTag() {
@@ -58,8 +67,7 @@ function tagSelected(event) {
         && ingredientsTagsSelected.every(tags => recipe.ingredients.some(ingredientItem => ingredientItem.ingredient.includes(tags)))
       );
 
-      // recipesUpdated = recipesCorrespondingToTags
-      // Tableau des recettes actualisés avec les tags sélectionnés
+      // Affichage des recettes actualisés avec les tags sélectionnés
       recipesSection.innerHTML = "";
     
       recipesUpdated.forEach(recipe => {
@@ -76,7 +84,7 @@ function tagSelected(event) {
 
 
     function listTagUpdated() {
-      // ingredients
+      // Liste dropdown des ingredients actualisée avec tag(s) sélectionné(s)
       let ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient));
       let ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)];
       
@@ -95,7 +103,7 @@ function tagSelected(event) {
         TagIngredients.appendChild(list);
       })
 
-      // ustensils
+      // Liste dropdown des ustensiles actualisée avec tag(s) sélectionné(s)
       let ListTagsUstensils = recipesUpdated.flatMap((recipe) => recipe.ustensils);
       let ListTagsUstensilsUniqueArray  = [...new Set(ListTagsUstensils)];
       
@@ -114,7 +122,7 @@ function tagSelected(event) {
         TagUstensils.appendChild(list);
       })
 
-      // appliances
+      // Liste dropdown des appareils actualisée avec tag(s) sélectionné(s)
       let ListTagsAppliances = recipesUpdated.flatMap((recipe) => recipe.appliance);
       let ListTagsAppliancesUniqueArray  = [...new Set(ListTagsAppliances)];
       
@@ -136,9 +144,10 @@ function tagSelected(event) {
 
 }
 
+// Ajout event listener sur chaque tag dans chaque dropdown
 tags.forEach((tag) => tag.addEventListener('click',tagSelected));
 
-
+// Affichage actualisé lorsqu'on retire un tag de la sélection
 function DisplayRecipesClickBtnCloseTag() {
   arrayTagSelected = Array.from(document.querySelectorAll('.tag-name'));
 
@@ -155,10 +164,3 @@ function DisplayRecipesClickBtnCloseTag() {
     })
   }
 }
-
-  // Manque re actualiser liste tags apres avoir sélectionné un tag
-// keyup barre de re cherche principal 
-
-// temps de latence quand on tape du texte dans 'linput
-
-// event prevent default pour empecher l'input dropdown de fonctionner

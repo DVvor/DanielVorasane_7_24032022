@@ -2,7 +2,6 @@
 const inputIngredients = document.querySelector('.input-ingredients');
 const inputAppliances = document.querySelector('.input-appliances');
 const inputUstensils = document.querySelector('.input-ustensils');
-const inputSearch = document.querySelector('.searchbar_input');
 
 const arrowIngredients = document.querySelector('.arrow-ingredients');  
 const arrowAppliances = document.querySelector('.arrow-appliances');  
@@ -22,12 +21,12 @@ arrows.forEach(arrow => arrow.addEventListener('click', openDropdown));
 
 let recipesUpdated = recipes;
 
+// Affichage du menu dropdown quand on édite du texte dans la barre de recherche de chaque dropdown
+inputIngredients.addEventListener('input', openDropdown);
+inputAppliances.addEventListener('input', openDropdown);
+inputUstensils.addEventListener('input', openDropdown);
 
-inputIngredients.addEventListener('change', openDropdown);
-inputAppliances.addEventListener('change', openDropdown);
-inputUstensils.addEventListener('change', openDropdown);
-
-
+// Dropdown fonctionnalité - Ouverture et fermeture
 function openDropdown(event) {
   const menuSelected = event.target.parentNode.parentNode;
   const inputMenuSelected = event.target.parentNode.querySelector('.input-dropdown');
@@ -82,7 +81,7 @@ function openDropdown(event) {
   }
 }
 
-// Affichage de la liste des ingrédients dans le dropdown ingrédient
+// Affichage de la liste des ingrédients dans le dropdown ingrédient au démarrage
 function addListIgredientDropdown() {
   const ListTagsIngredients = recipesUpdated.flatMap((recipe) => recipe.ingredients.map( Allingredients => Allingredients.ingredient));
   const ListTagsIngredientsUniqueArray  = [...new Set(ListTagsIngredients)];
@@ -94,7 +93,6 @@ function addListIgredientDropdown() {
     let list = document.createElement("li");
     list.innerText = item;
     list.classList = "tag";
-    // list.addEventListener('click', tagSelected);
 
 
     TagIngredients.appendChild(list);
@@ -103,6 +101,7 @@ function addListIgredientDropdown() {
 }
 addListIgredientDropdown()
 
+// Affichage de la liste des ingrédients dans le dropdown appareils au démarrage
 function addListAppliancesDropdown() {
   const ListTagsAppliances = recipesUpdated.map( recipe => recipe.appliance);
   const ListTagsAppliancesUniqueArray  = [...new Set(ListTagsAppliances)]; 
@@ -114,7 +113,6 @@ function addListAppliancesDropdown() {
     let list = document.createElement("li");
     list.innerText = item;
     list.classList = "tag";
-    // list.addEventListener('click', tagSelected);
 
 
     TagAppliances.appendChild(list);
@@ -123,6 +121,7 @@ function addListAppliancesDropdown() {
 }
 addListAppliancesDropdown()
 
+// Affichage de la liste des ingrédients dans le dropdown ustensiles au démarrage
 function addListUstensilsDropdown() {
   const ListTagsUstensils = recipesUpdated.flatMap((recipe) => recipe.ustensils);
   const ListTagsUstensilsUniqueArray  = [...new Set(ListTagsUstensils)];
@@ -134,7 +133,6 @@ function addListUstensilsDropdown() {
     let list = document.createElement("li");
     list.innerText = item;
     list.classList = "tag";
-    // list.addEventListener('click', tagSelected);
 
 
     TagUstensils.appendChild(list);
@@ -142,10 +140,8 @@ function addListUstensilsDropdown() {
 }
 addListUstensilsDropdown()
 
-// List filtrée des ingrédients quand on cherche avec la barre de recherche du dropdown ingrédient
-
+// Liste filtrée des dropdown quand on cherche avec la barre de recherche du dropdown ingrédient
 function listFilteredWithSearchbarDropdown(e){
-
   const element = e.target.value.toLowerCase();
   const menuTag = e.target.parentNode.parentNode.querySelector('.tags');
 
@@ -193,9 +189,8 @@ function listFilteredWithSearchbarDropdown(e){
 
     menuTag.appendChild(list);
   })
-
 }
+
 inputIngredients.addEventListener('input',listFilteredWithSearchbarDropdown);
 inputAppliances.addEventListener('input',listFilteredWithSearchbarDropdown);
 inputUstensils.addEventListener('input',listFilteredWithSearchbarDropdown);
-
