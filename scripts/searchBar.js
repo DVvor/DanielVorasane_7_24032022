@@ -37,36 +37,28 @@ function searchBar(){
     // recipesUpdated = result;
     // console.log(recipesUpdated)
 
-    // recipesSection.innerHTML = "";
-    // let recipesCorrespondingToInput = []
+    const result = [];
+
+    // avec boucles natives (while, for,...)
+    // i représente chaque recette du fichier recipes.
     for (let i = 0; i < recipes.length; i++) {
       if (recipes[i].name.toLowerCase().includes(inputElement)) {
-        recipesCorrespondingToInput.push(recipes[i]);
+        result.push(recipes[i]);
       } else if (recipes[i].description.toLowerCase().includes(inputElement)) {
-        recipesCorrespondingToInput.push(recipes[i]);
+        result.push(recipes[i]);
       } else if (recipes[i].ingredients.some(item => item.ingredient.toLowerCase().includes(inputElement))) {
-        recipesCorrespondingToInput.push(recipes[i]);
+        result.push(recipes[i]);
       }
     }
-    for (let i = 0; i < recipesCorrespondingToInput.length; i++) {
-        const recipeModel = recipeFactory(recipesCorrespondingToInput[i]);
-        const recipeCard = recipeModel.card(); 
-    }
+
     // Affichage message d'erreur si la saisie ne correspond à aucune recette
     if(recipesUpdated == 0) {
       messageError.style.display ='block';
       messageError.textContent = 'Aucune recette ne correspond à votre critère...vous pouvez chercher "tarte aux pommes", "poisson" etc.';
     }
-    console.log(recipesCorrespondingToInput)
-    recipesSection.innerHTML = "";
-    displayRecipes();
-    // recipesCorrespondingToInput.forEach(recipe => {
-    //   const recipeModel = recipeFactory(recipe);
-    //   const recipeCard = recipeModel.card();
 
-    //   recipesSection.appendChild(recipeCard);
-    // })
-    alert('ssssss')
+    recipesSection.innerHTML = "";
+    displayRecipes(result);
   }
   addListAppliancesDropdown();
   addListIgredientDropdown();
