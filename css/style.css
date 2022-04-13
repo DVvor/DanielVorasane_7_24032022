@@ -1,5 +1,5 @@
 body {
-    margin: 0;
+    margin: 0px;
     font-family: Lato;
 }
 .header {
@@ -14,11 +14,10 @@ body {
     height: 93px;
     width: 268px;
 }
-main {
+/* main {
     margin-left: 10%;
     margin-right: 10%;
-    min-width: 1080px;
-}
+} */
 /* Searchbar ************************************************************** */
 .searchbar {
     height: 69px;

@@ -13,7 +13,7 @@ function searchBar(){
   if(inputElement.length == 0) {
     messageError.style.display ='none';
     messageError.textContent = '';
-    displayRecipes()
+    displayRecipes(recipes)
     recipesUpdated = recipes;
   }
   
