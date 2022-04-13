@@ -5,7 +5,7 @@ const recipesSection = document.querySelector(".recipes-section");
 // creation carte recette
 function recipeFactory(recipe) {
 
-const {id, name,servings, ingredients,time,description,appliance,ustensils } = recipe;
+const {name, ingredients, time, description } = recipe;
 
     function card(){
 
@@ -61,12 +61,6 @@ const {id, name,servings, ingredients,time,description,appliance,ustensils } = r
                     timeContent.appendChild(duration);
             textContentCard.appendChild(textContent);
                 textContent.appendChild(listIngredients);
-
-                /************plusieurs ingredients */
-                listIngredients.appendChild(component);
-                component.appendChild(typeIngredient);
-                component.appendChild(qty);
-                /******************************** */
 
                 textContent.appendChild(dscrptn);
 
