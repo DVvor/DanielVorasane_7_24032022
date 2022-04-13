@@ -35,7 +35,6 @@ function searchBar(){
     // Recherche dans nom , description, ingredient
     );
     recipesUpdated = result;
-    console.log(recipesUpdated)
 
     recipesSection.innerHTML = "";
 
