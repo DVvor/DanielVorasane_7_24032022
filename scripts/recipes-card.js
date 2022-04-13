@@ -74,9 +74,9 @@ const {id, name,servings, ingredients,time,description,appliance,ustensils } = r
     }
     return {card}
 }
+let recipesCorrespondingToInput = []
 
-
-function displayRecipes() {
+function displayRecipes(recipes) {
     recipes.forEach(recipe => {
         const recipeModel = recipeFactory(recipe);
         const recipeCard = recipeModel.card();
