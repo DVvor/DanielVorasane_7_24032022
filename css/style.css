@@ -1,5 +1,6 @@
 body {
-    margin: 0px;
+    margin-left: 5%;
+    margin-right: 5%;
     font-family: Lato;
 }
 .header {
@@ -14,10 +15,7 @@ body {
     height: 93px;
     width: 268px;
 }
-/* main {
-    margin-left: 10%;
-    margin-right: 10%;
-} */
+
 /* Searchbar ************************************************************** */
 .searchbar {
     height: 69px;
@@ -304,8 +302,8 @@ transition: 0.1s;
 /* recipes card ************************************************************* */
 
 .recipes-card {
-    /* min-height: 400px;
-    min-width: 30%; */
+    min-width: 400px;
+    /* min-width: 30%; */
     aspect-ratio: 1/1;
     border-radius: 5px;
     background-color: antiquewhite;
@@ -420,3 +418,24 @@ transition: 0.1s;
     overflow: hidden;
 }
 /* **************** ************************************************************** */
+@media screen and (max-width: 1440px)
+{
+    .recipes-section {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media screen and (max-width: 960px)
+{
+    .recipes-section {
+        grid-template-columns: 1fr;
+        min-width: 320px;
+    }
+
+    .recipes-card {
+        margin-left: 15%;
+        margin-right: 15%;
+        height: 400px;
+        width: 70%;
+    }
+}
