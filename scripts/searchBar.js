@@ -13,7 +13,7 @@ function searchBar(){
   if(inputElement.length == 0) {
     messageError.style.display ='none';
     messageError.textContent = '';
-    displayRecipes()
+    displayRecipes(recipes);
     recipesUpdated = recipes;
   }
   
@@ -45,12 +45,7 @@ function searchBar(){
       messageError.textContent = 'Aucune recette ne correspond à votre critère...vous pouvez chercher "tarte aux pommes", "poisson" etc.';
     }
     
-    result.forEach(recipe => {
-      const recipeModel = recipeFactory(recipe);
-      const recipeCard = recipeModel.card();
-
-      recipesSection.appendChild(recipeCard);
-    })
+  displayRecipes(result);
   }
   addListAppliancesDropdown();
   addListIgredientDropdown();

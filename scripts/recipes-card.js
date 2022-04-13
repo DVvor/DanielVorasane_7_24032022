@@ -70,7 +70,7 @@ const {name, ingredients, time, description } = recipe;
 }
 
 
-function displayRecipes() {
+function displayRecipes(recipes) {
     recipes.forEach(recipe => {
         const recipeModel = recipeFactory(recipe);
         const recipeCard = recipeModel.card();
@@ -80,8 +80,7 @@ function displayRecipes() {
     })
 }
 
-displayRecipes()
-
+displayRecipes(recipes);
 
 function createIngredient(ingredientArray) {
     const component = document.createElement("div");
