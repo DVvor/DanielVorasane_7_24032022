@@ -56,7 +56,7 @@ function searchBar(){
   tagSection.innerHTML = "" ;
 }
 
-inputSearch.addEventListener('change', displayAfterSearch);
+inputSearch.addEventListener('keypress', displayAfterSearch);
 
 // Affichage des recettes en différé d'une seconde après une seconde
 function displayAfterSearch(){
