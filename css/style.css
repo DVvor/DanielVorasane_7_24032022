@@ -171,7 +171,12 @@ input::placeholder {
 input:focus::-webkit-input-placeholder {
     color: #E7E7E7;
 }
-input {
+
+input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+}
+
+  input {
     width: 100%;
     background-color: transparent;
     font-size: 18px;
